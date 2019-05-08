@@ -44,8 +44,8 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             ImageSendMessage(
-                preview_image_url = 'https://{}/img/table.jpg'.format(request.environ['HTTP_HOST']),
-                original_content_url ='https://{}/img/table.jpg'.format(request.environ['HTTP_HOST'])
+                preview_image_url = 'https://{}/static/table.jpg'.format(request.environ['HTTP_HOST']),
+                original_content_url ='https://{}/static/table.jpg'.format(request.environ['HTTP_HOST'])
             ))
     else:
         line_bot_api.reply_message(
