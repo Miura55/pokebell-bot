@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,
 )
 import os
 
@@ -40,9 +40,17 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    if event.message.text == "変換表":
+        line_bot_api.reply_message(
+            event.reply_token,
+            ImageSendMessage(
+                preview_image_url = 'https://{}/img/table.jpg'.format(request.environ['HTTP_HOST']),
+                original_content_url ='https://{}/img/table.jpg'.format(request.environ['HTTP_HOST'])
+            ))
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
 
 
 if __name__ == "__main__":
